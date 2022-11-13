@@ -26,8 +26,6 @@
 # Project gen files
 .idea
 .allure/
-/allure-report
-/notifications
 .gradle/
 allure-results/
 gradle/
