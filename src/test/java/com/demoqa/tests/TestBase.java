@@ -14,17 +14,19 @@ public class TestBase {
     @BeforeAll
     static void configure() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
 
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+
+        capabilities.setCapability("browserName", System.getProperty("browserName", "chrome"));
+        capabilities.setCapability("browserVersion", System.getProperty("browserVersion", "99"));
         Configuration.browserCapabilities = capabilities;
-        Configuration.browser = SystemProperties.browser();
-        Configuration.browserVersion = SystemProperties.browserVersion();
-        Configuration.browserSize = SystemProperties.browserSize();
+        Configuration.browserSize = System.getProperty("browserSize", "2560x1440");
+
         if (System.getProperty("remoteUrl") != null) {
             Configuration.remote = System.getProperty("remoteUrl");
         }
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
     }
 
     @AfterEach
